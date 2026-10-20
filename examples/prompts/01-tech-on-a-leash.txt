@@ -1,0 +1,43 @@
+Create one standalone 16:9 landscape illustration for a blog article.
+
+CHARACTER — keep exactly on-model:
+The reference image is the brand mark of the recurring character, the Chan monkey. Reproduce
+its head exactly: one flat solid near-black (#070607) head with round ears, a white crescent
+knockout in each ear, a large white heart/peanut-shaped face knockout, two big solid round
+eyes, two small nostril dots, one wide shallow smile, and the signature two-strand hair curl
+rising from the top of the crown and sweeping up to the right. Clean smooth curves, no outline, no texture,
+no shading. Give it a small rounded solid ink body, thin line arms and legs, simple round
+hands, and a long thin curly tail. The head stays the dominant part of the character.
+Expression: neutral: the logo's own eyes and smile.
+The monkey must perform the core action of the idea, not decorate the scene.
+
+STYLE:
+Pure white background. Minimal hand-drawn black ink line art, thin slightly wobbly
+felt-tip lines, generous empty space. The monkey is the only large solid black shape.
+Sparse brand colour: orange (#FC5000) for the main flow, arrows and motion lines;
+violet (#524AE9) for the notification bubbles only;
+one pale yellow (#F5F28E) highlighter swipe behind "a tool".
+No other colours. No gradients, shadows, paper texture, 3D, realistic UI, corporate vector
+style, slide or infographic look, children's-book or kawaii style.
+
+IDEA:
+Technology should be a tool you walk, not a master that walks you.
+
+SCENE:
+A single walk, left to right. The monkey strolls calmly to the right, walking a large
+smartphone that has little stick legs like a dog, on a short orange leash held in the
+monkey's curly tail while its hands are relaxed. The phone strains backwards toward a small
+swarm of violet notification bubbles drifting in from the left; the monkey doesn't look back.
+Orange motion lines behind the monkey's feet show it sets the direction.
+
+Objects: smartphone on legs, orange leash, a few notification bubbles.
+
+LABELS — handwritten, short, spelled exactly as given, nothing else written:
+"a tool", "not the master", "ping!"
+Language: English. Ink for names of things, orange for the action or result, violet for side notes.
+"ping!" goes inside one notification bubble, "a tool" near the phone, "not the master" near the leash.
+
+CONSTRAINTS:
+One idea only. Subject fills about half the canvas, at least a third stays empty white.
+No title, heading, caption, signature, watermark or logo wordmark. Do not write the
+structure type. Not a formal diagram. Clever and playful, clean, a little absurd.

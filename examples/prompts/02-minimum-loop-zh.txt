@@ -1,0 +1,42 @@
+Create one standalone 16:9 landscape illustration for a blog article.
+
+CHARACTER — keep exactly on-model:
+The reference image is the brand mark of the recurring character, the Chan monkey. Reproduce
+its head exactly: one flat solid near-black (#070607) head with round ears, a white crescent
+knockout in each ear, a large white heart/peanut-shaped face knockout, two big solid round
+eyes, two small nostril dots, one wide shallow smile, and the signature two-strand hair curl
+rising from the top of the crown and sweeping up to the right. Clean smooth curves, no outline, no texture,
+no shading. Give it a small rounded solid ink body, thin line arms and legs, simple round
+hands, and a long thin curly tail. The head stays the dominant part of the character.
+Expression: focused: eyes glancing right, small flat mouth.
+The monkey must perform the core action of the idea, not decorate the scene.
+
+STYLE:
+Pure white background. Minimal hand-drawn black ink line art, thin slightly wobbly
+felt-tip lines, generous empty space. The monkey is the only large solid black shape.
+Sparse brand colour: orange (#FC5000) for the main flow, arrows and motion lines;
+no violet;
+one pale yellow (#F5F28E) highlighter swipe behind "先跑通".
+No other colours. No gradients, shadows, paper texture, 3D, realistic UI, corporate vector
+style, slide or infographic look, children's-book or kawaii style.
+
+IDEA:
+Before building the big plan, close the smallest loop that actually works end to end.
+
+SCENE:
+A single strange object. On the right, the monkey sits on the floor and, with its tail,
+ties the two ends of a short orange rope into a small closed loop; a tiny toy train runs
+round that loop, with orange motion lines. On the left, ignored, a huge tangled heap of
+black ink rope with a dangling paper tag.
+
+Objects: small orange rope loop with a tiny train, huge tangled rope heap with a tag.
+
+LABELS — handwritten, short, spelled exactly as given, nothing else written:
+"最小闭环", "先跑通", "大计划"
+Language: Simplified Chinese. "大计划" is written on the tag of the tangled heap in ink,
+"最小闭环" beside the small loop in orange, "先跑通" under the monkey in ink.
+
+CONSTRAINTS:
+One idea only. Subject fills about half the canvas, at least a third stays empty white.
+No title, heading, caption, signature, watermark or logo wordmark. Do not write the
+structure type. Not a formal diagram. Clever and playful, clean, a little absurd.
