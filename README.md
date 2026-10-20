@@ -162,11 +162,13 @@ chan-monkey-illustrations/          # the skill
 ├── assets/monkey/                  # monkey-reference.png (1024², black on white) + source SVG
 └── assets/examples/                # calibration images
 examples/                           # the images and prompts shown in this README
+tools/render-reference.cjs          # re-renders monkey-reference.png from the logo SVG
 ```
 
 `monkey-reference.png` is rendered from
 [`chan-meng-monkey-black-on-white.svg`](https://github.com/ChanMeng666/chan-meng-personal-brand-logo)
-at 760 px on a 1024 px white square. If the logo changes, re-render it.
+at 760 px on a 1024 px white square. If the logo changes, re-render it with
+`node tools/render-reference.cjs <svg> [path/to/sharp]`.
 
 ## Credits
 
