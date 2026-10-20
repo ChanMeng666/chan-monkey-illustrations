@@ -15,3 +15,5 @@ represent anyone else or your own products.
 
 The example images in `examples/images/` and `chan-monkey-illustrations/assets/examples/`
 were generated with this skill (OpenAI `gpt-image-2`) as style calibration.
+All text and documentation in this repository is in English; the skill itself works in English
+and Chinese.

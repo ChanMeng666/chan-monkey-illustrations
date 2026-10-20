@@ -95,3 +95,8 @@ hand-lettered style, colour, size and position. Change nothing else.
   often uses the hands and leaves the tail as decoration.
 - Dense textures (tangles, crowds, piles) come out busier than asked; say "a loose tangle of
   a few loops" rather than "a huge tangled heap".
+- Say where the tail grows from — "from the lower back, behind the body" — when it does
+  something above the monkey's head; otherwise it can start at the shoulder and read as an arm.
+- To get the same picture in another shape, edit the first render with a "recompose into a
+  16:9 landscape frame, change only the layout" prompt instead of generating again; the
+  character, objects and labels carry over.

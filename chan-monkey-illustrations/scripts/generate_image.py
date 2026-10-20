@@ -63,27 +63,83 @@ def free_path(path: Path) -> Path:
         n += 1
 
 
-def crop_to(data: bytes, width: int, height: int) -> bytes:
-    """Centre-crop to the requested aspect ratio, used when the API ignored a custom size."""
-    try:
-        from io import BytesIO
-        from PIL import Image
-    except ImportError:
-        return data
-    img = Image.open(BytesIO(data))
+# Final pixel sizes. Requests are rounded up to multiples of 16 (an API constraint), then
+# cropped and resized to these.
+SIZES = {
+    "article": (1536, 864),   # 16:9 inline figure
+    "linkedin": (1080, 1350), # 4:5 portrait, the most feed space on LinkedIn
+    "x": (1600, 900),         # 16:9, shows uncropped on X
+}
+
+# The page colour. Generation is always on white; a non-white ground is swapped in after.
+GROUNDS = {
+    "white": None,
+    "basalt": (0xE2, 0xE2, 0xDF),  # social post visuals (linkedin-post-skill)
+    "ash": (0xF7, 0xF6, 0xF2),
+}
+
+
+def parse_size(value: str) -> tuple[int, int]:
+    if value in SIZES:
+        return SIZES[value]
+    w, h = (int(v) for v in value.lower().split("x"))
+    return w, h
+
+
+def request_size(width: int, height: int) -> str:
+    def up16(v: int) -> int:
+        return -(-v // 16) * 16
+    return f"{up16(width)}x{up16(height)}"
+
+
+def fallback_size(width: int, height: int) -> str:
+    ratio = width / height
+    if ratio > 1.1:
+        return "1536x1024"
+    if ratio < 0.9:
+        return "1024x1536"
+    return "1024x1024"
+
+
+def finish(data: bytes, width: int, height: int, ground) -> bytes:
+    """Centre-crop to the target aspect, resize to the exact size, swap in the ground."""
+    from io import BytesIO
+    from PIL import Image
+
+    img = Image.open(BytesIO(data)).convert("RGB")
     w, h = img.size
     target = width / height
-    if abs(w / h - target) < 0.01:
-        return data
-    if w / h > target:
-        new_w = round(h * target)
-        box = ((w - new_w) // 2, 0, (w - new_w) // 2 + new_w, h)
-    else:
-        new_h = round(w / target)
-        box = (0, (h - new_h) // 2, w, (h - new_h) // 2 + new_h)
+    if abs(w / h - target) > 0.005:
+        if w / h > target:
+            new_w = round(h * target)
+            img = img.crop(((w - new_w) // 2, 0, (w - new_w) // 2 + new_w, h))
+        else:
+            new_h = round(w / target)
+            img = img.crop((0, (h - new_h) // 2, w, (h - new_h) // 2 + new_h))
+    if img.size != (width, height):
+        img = img.resize((width, height), Image.LANCZOS)
+    if ground is not None:
+        img = swap_ground(img, ground)
     out = BytesIO()
-    img.crop(box).save(out, format="PNG")
+    img.save(out, format="PNG")
     return out.getvalue()
+
+
+def swap_ground(img, ground):
+    """Replace white paper with the ground colour, leaving ink and brand colours alone.
+
+    Each pixel moves toward the ground by (its darkest channel / 255) ** 4: paper white moves
+    all the way, anti-aliased edges part way, and saturated orange / violet (darkest channel
+    near 0) and ink stay put. The monkey's face knockout becomes the ground too, as it is
+    on the real logo.
+    """
+    import numpy as np
+    from PIL import Image
+
+    px = np.asarray(img, dtype=np.float32)
+    weight = (px.min(axis=2, keepdims=True) / 255.0) ** 4
+    out = px * (1 - weight) + np.array(ground, dtype=np.float32) * weight
+    return Image.fromarray(out.round().clip(0, 255).astype(np.uint8))
 
 
 def main() -> int:
@@ -95,7 +151,11 @@ def main() -> int:
     p.add_argument("--out", type=Path, required=True, help="output PNG path")
     p.add_argument("--edit", type=Path, help="image to edit (sent first, before the monkey reference)")
     p.add_argument("--ref", type=Path, action="append", default=[], help="extra reference image (repeatable)")
-    p.add_argument("--size", default=os.getenv("OPENAI_IMAGE_SIZE", "1536x864"), help="WIDTHxHEIGHT, default 1536x864 (16:9)")
+    p.add_argument("--size", default=os.getenv("OPENAI_IMAGE_SIZE", "article"),
+                   help="article (1536x864, default) | linkedin (1080x1350) | x (1600x900) | WIDTHxHEIGHT")
+    p.add_argument("--ground", choices=sorted(GROUNDS), default="white",
+                   help="page colour: white (default), basalt (social posts), ash")
+    p.add_argument("--overwrite", action="store_true", help="replace --out instead of writing -v2")
     p.add_argument("--quality", default=os.getenv("OPENAI_IMAGE_QUALITY", "high"))
     p.add_argument("--model", default=os.getenv("OPENAI_IMAGE_MODEL", "gpt-image-2"))
     args = p.parse_args()
@@ -111,7 +171,8 @@ def main() -> int:
             print(f"Error: image not found: {img}", file=sys.stderr)
             return 2
 
-    width, height = (int(v) for v in args.size.lower().split("x"))
+    width, height = parse_size(args.size)
+    size = request_size(width, height)
     client = build_client()
     files = [open(img, "rb") for img in images]
     request = dict(
@@ -126,25 +187,26 @@ def main() -> int:
     if args.model.startswith("gpt-image-1"):
         request["input_fidelity"] = "high"
     try:
-        print(f"Generating with {args.model} at {args.size} ({len(images)} input image(s))...")
+        print(f"Generating with {args.model} at {size} ({len(images)} input image(s))...")
         try:
-            result = client.images.edit(size=args.size, **request)
+            result = client.images.edit(size=size, **request)
         except BadRequestError as e:
             # Endpoints without custom sizes: fall back to 3:2 and crop.
-            if args.size == "1536x1024" or "size" not in str(e.body or e.message).lower():
+            fallback = fallback_size(width, height)
+            if size == fallback or "size" not in str(e.body or e.message).lower():
                 raise
-            print(f"Size {args.size} rejected; retrying at 1536x1024 and cropping.")
+            print(f"Size {size} rejected; retrying at {fallback} and cropping.")
             for f in files:
                 f.seek(0)
-            result = client.images.edit(size="1536x1024", **request)
+            result = client.images.edit(size=fallback, **request)
     finally:
         for f in files:
             f.close()
 
     data = base64.b64decode(result.data[0].b64_json)
-    data = crop_to(data, width, height)
+    data = finish(data, width, height, GROUNDS[args.ground])
 
-    out = free_path(args.out)
+    out = args.out if args.overwrite else free_path(args.out)
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_bytes(data)
 

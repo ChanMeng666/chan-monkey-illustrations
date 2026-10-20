@@ -1,0 +1,44 @@
+Create one standalone illustration for a LinkedIn post, 4:5 portrait.
+
+CHARACTER — keep exactly on-model:
+The reference image is the brand mark of the recurring character, the Chan monkey. Reproduce
+its head exactly: one flat solid near-black (#070607) head with round ears, a white crescent
+knockout in each ear, a large white heart/peanut-shaped face knockout, two big solid round
+eyes, two small nostril dots, one wide shallow smile, and the signature two-strand hair curl
+rising from the top of the crown and sweeping up to the right. Clean smooth curves, no outline, no texture,
+no shading. Give it a small rounded solid ink body, thin line arms and legs, simple round
+hands, and a long thin curly tail. The head stays the dominant part of the character.
+Expression: focused: eyes glancing toward the jar, small flat mouth.
+The monkey must perform the core action of the idea, not decorate the scene.
+
+STYLE:
+Pure white background. Minimal hand-drawn black ink line art, thin slightly wobbly
+felt-tip lines, generous empty space. The monkey is the only large solid black shape.
+Exactly one orange (#FC5000) element: the hand-drawn squiggly path described below. Everything
+else is black ink. No violet, no highlighter, no other colours. No gradients, shadows, paper
+texture, 3D, realistic UI, corporate vector style, slide or infographic look, children's-book
+or kawaii style.
+
+IDEA:
+An agent works a problem out once; when the same job keeps coming back, the path that worked
+is kept as code — like preserving it in a jar.
+
+SCENE:
+Stacked vertically for a portrait frame. Centre: a large glass preserving jar, drawn in ink
+outline, with a simple paper label. Inside the jar floats one bold orange squiggly path — a
+looping line with a dot at the start and an arrowhead at the end, like a route that was worked
+out. The monkey stands beside the jar holding up a sheet of paper with pencil scribbles in one
+hand, and with its curly tail (not its hands) screws the lid onto the jar. Lower left, a few
+crumpled and torn ink-outlined paper scraps tumble away out of the frame with small motion
+lines.
+
+Objects: glass jar with lid and label, torn paper scraps.
+
+LABELS — handwritten, short, spelled exactly as given, nothing else written:
+"code" on the jar's paper label, "one-off" next to the tumbling scraps.
+Language: English. Both labels in black ink.
+
+CONSTRAINTS:
+One idea only. Subject fills about 60% of the canvas, the rest stays empty white.
+No title, heading, caption, signature, watermark or logo wordmark. Not a formal diagram.
+Clever and playful, clean, a little absurd.

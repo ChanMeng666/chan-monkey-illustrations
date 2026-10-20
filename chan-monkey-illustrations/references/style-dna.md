@@ -52,3 +52,23 @@ friend at a whiteboard, with a wink.
 - Realistic UI, screenshots, glowing tech, 3D, isometric.
 - Children's book style, kawaii, sticker sheets, emoji style.
 - Dense scenes: many nodes, many arrows, every step explained.
+
+## Social post profile (LinkedIn / X)
+
+Used when the image goes in a feed — `linkedin-post-skill` calls this skill with it. The
+feed has stricter brand rules than the blog, and the image is seen at phone width for a
+second while scrolling:
+
+- `--ground basalt` (`#E2E2DF`): post visuals are never pure white. Prompt on white as usual;
+  the script swaps the ground after generation.
+- `--size linkedin` (1080×1350, 4:5) and `--size x` (1600×900, 16:9). Compose for the shape:
+  portrait stacks vertically (monkey low, the thing it works on above, or the reverse);
+  landscape reads left to right.
+- **One orange accent**: the single element the post is about (the path, the thing being
+  moved, the result). Not every arrow.
+- **Violet is never text**: violet marks only (emotes, bubbles, a feedback loop). Labels are
+  ink.
+- Glare at most once, as a highlighter swipe.
+- **0–3 labels**, 1–3 words each. The post carries the words; the image carries the idea.
+- Bigger and simpler than an article figure: one object, the monkey at least a quarter of
+  the frame's height, subject filling ~60%.

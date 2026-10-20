@@ -67,6 +67,10 @@ OpenAI Images edit endpoint with high input fidelity, so the monkey stays on-mod
 each prompt from `references/prompt-template.md` into a file first; keep the prompt files —
 they are the recipe for regenerating.
 
+Sizes: `--size article` (default, 1536×864), `--size linkedin` (1080×1350), `--size x`
+(1600×900). Page colour: `--ground white` (default) or `--ground basalt` for social posts —
+see "Social post profile" in `references/style-dna.md`.
+
 Environment: `OPENAI_API_KEY` (required), optional `OPENAI_BASE_URL`, `OPENAI_IMAGE_MODEL`
 (default `gpt-image-2`). The script reads a `.env` in the current directory or the skill
 folder. If no key is available and the host has its own image tool (e.g. Codex `image_gen`),
